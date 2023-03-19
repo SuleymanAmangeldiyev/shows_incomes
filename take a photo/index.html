@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Take a Picture</title>
+  </head>
+  <body>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const snapButton = document.getElementById("snap");
+
+      // Get the user's camera stream
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (error) {
+          console.error("Error accessing user media", error);
+        });
+
+      // Take a photo when the snap button is clicked
+      snapButton.addEventListener("click", function () {
+        // Draw the video frame on the canvas
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Get the photo data from the canvas
+        const photoData = canvas.toDataURL();
+
+        // Do something with the photo data (e.g. send it to a server)
+        console.log(photoData);
+      });
+    </script>
+  </body>
+</html>
