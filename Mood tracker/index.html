@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Tracker</title>
+    <style>
+      .mood-tracker {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .mood-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0;
+      }
+
+      .mood {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .happy {
+        background-color: #ffd700;
+      }
+
+      .neutral {
+        background-color: #c0c0c0;
+      }
+
+      .sad {
+        background-color: #008080;
+      }
+
+      #save-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #save-btn:hover {
+        background-color: #3e8e41;
+      }
+
+      #message {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mood-tracker">
+      <h2>My Mood Tracker</h2>
+      <div class="mood-container">
+        <div class="mood happy" data-mood="happy"></div>
+        <div class="mood neutral" data-mood="neutral"></div>
+        <div class="mood sad" data-mood="sad"></div>
+      </div>
+      <button id="save-btn">Save Mood</button>
+      <p id="message"></p>
+    </div>
+    <script>
+      const moods = document.querySelectorAll(".mood");
+      const saveBtn = document.getElementById("save-btn");
+      const message = document.getElementById("message");
+
+      let selectedMood = "";
+
+      moods.forEach((mood) => {
+        mood.addEventListener("click", () => {
+          moods.forEach((mood) => mood.classList.remove("selected"));
+          mood.classList.add("selected");
+          selectedMood = mood.getAttribute("data-mood");
+        });
+      });
+
+      saveBtn.addEventListener("click", () => {
+        if (selectedMood === "") {
+          message.textContent = "Please select a mood";
+        } else {
+          message.textContent = `Mood saved: ${selectedMood}`;
+          selectedMood = "";
+          moods.forEach((mood) => mood.classList.remove("selected"));
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
