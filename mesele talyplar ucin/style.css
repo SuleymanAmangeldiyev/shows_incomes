@@ -1,0 +1,21 @@
+body {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.sanlar {
+  display: flex;
+  gap: 30px;
+}
+.sanlar input {
+  width: 60px;
+  height: 30px;
+}
+#yeji {
+  background-color: aqua;
+  height: 40px;
+  width: 80px;
+}
